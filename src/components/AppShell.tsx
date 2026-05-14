@@ -11,7 +11,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const path = useRouterState({ select: (s) => s.location.pathname });
 
-  const navLink = (to: string, label: string) => {
+  const navLink = (to: string, label: ReactNode) => {
     const active = path === to;
     return (
       <Link
