@@ -98,7 +98,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           {navLink("/", "Home")}
           {navLink("/number-game", "Number")}
           {navLink("/word-game", "Word")}
-          {navLink("/leaderboard", <Trophy className="w-4 h-4" /> as unknown as string)}
+          {navLink("/leaderboard", <Trophy className="w-4 h-4" />)}
         </div>
       </header>
 
