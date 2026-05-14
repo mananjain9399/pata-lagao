@@ -47,7 +47,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <Sparkles className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-display font-bold text-lg tracking-tight">
-              Pata<span className="text-aurora">Lagao</span>
+              <span className="text-aurora">Guess</span>
             </span>
           </Link>
 
@@ -105,7 +105,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <main className="flex-1">{children}</main>
 
       <footer className="text-center text-xs text-muted-foreground py-6">
-        Made with 💜 · <span className="text-aurora">PataLagao</span>
+        Made with 💜 · <span className="text-aurora">Guess</span>
       </footer>
     </div>
   );
