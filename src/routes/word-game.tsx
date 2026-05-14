@@ -292,7 +292,7 @@ function WordGame() {
             disabled={status !== "playing"}
             className="px-6 py-4 rounded-2xl bg-aurora font-semibold text-primary-foreground disabled:opacity-50 hover:scale-[1.02] transition"
           >
-            Pata Lagao
+            Guess
           </button>
         </form>
 
