@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WordGameRouteImport } from './routes/word-game'
 import { Route as NumberGameRouteImport } from './routes/number-game'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WordGameRoute = WordGameRouteImport.update({
+  id: '/word-game',
+  path: '/word-game',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NumberGameRoute = NumberGameRouteImport.update({
   id: '/number-game',
   path: '/number-game',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/number-game': typeof NumberGameRoute
+  '/word-game': typeof WordGameRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/number-game': typeof NumberGameRoute
+  '/word-game': typeof WordGameRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/number-game': typeof NumberGameRoute
+  '/word-game': typeof WordGameRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/number-game'
+  fullPaths: '/' | '/auth' | '/number-game' | '/word-game'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/number-game'
-  id: '__root__' | '/' | '/auth' | '/number-game'
+  to: '/' | '/auth' | '/number-game' | '/word-game'
+  id: '__root__' | '/' | '/auth' | '/number-game' | '/word-game'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   NumberGameRoute: typeof NumberGameRoute
+  WordGameRoute: typeof WordGameRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/word-game': {
+      id: '/word-game'
+      path: '/word-game'
+      fullPath: '/word-game'
+      preLoaderRoute: typeof WordGameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/number-game': {
       id: '/number-game'
       path: '/number-game'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   NumberGameRoute: NumberGameRoute,
+  WordGameRoute: WordGameRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
