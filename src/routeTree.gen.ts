@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WordGameRouteImport } from './routes/word-game'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as NumberGameRouteImport } from './routes/number-game'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const WordGameRoute = WordGameRouteImport.update({
   id: '/word-game',
   path: '/word-game',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NumberGameRoute = NumberGameRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/leaderboard': typeof LeaderboardRoute
   '/number-game': typeof NumberGameRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/word-game': typeof WordGameRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/leaderboard': typeof LeaderboardRoute
   '/number-game': typeof NumberGameRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/word-game': typeof WordGameRoute
 }
 export interface FileRoutesById {
@@ -61,19 +69,33 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/leaderboard': typeof LeaderboardRoute
   '/number-game': typeof NumberGameRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/word-game': typeof WordGameRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/leaderboard' | '/number-game' | '/word-game'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/leaderboard'
+    | '/number-game'
+    | '/sitemap.xml'
+    | '/word-game'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/leaderboard' | '/number-game' | '/word-game'
+  to:
+    | '/'
+    | '/auth'
+    | '/leaderboard'
+    | '/number-game'
+    | '/sitemap.xml'
+    | '/word-game'
   id:
     | '__root__'
     | '/'
     | '/auth'
     | '/leaderboard'
     | '/number-game'
+    | '/sitemap.xml'
     | '/word-game'
   fileRoutesById: FileRoutesById
 }
@@ -82,6 +104,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   LeaderboardRoute: typeof LeaderboardRoute
   NumberGameRoute: typeof NumberGameRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WordGameRoute: typeof WordGameRoute
 }
 
@@ -92,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/word-game'
       fullPath: '/word-game'
       preLoaderRoute: typeof WordGameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/number-game': {
@@ -130,8 +160,19 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   LeaderboardRoute: LeaderboardRoute,
   NumberGameRoute: NumberGameRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   WordGameRoute: WordGameRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
