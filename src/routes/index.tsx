@@ -20,23 +20,23 @@ function Home() {
     <div className="max-w-6xl mx-auto px-4 pt-12 pb-20">
       <section className="text-center max-w-3xl mx-auto">
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-medium text-muted-foreground">
-          <Zap className="w-3 h-3 text-accent" /> Daily challenges · Hindi + English · Voice prompts
+          <Zap className="w-3 h-3 text-accent" /> 🎮 Daily challenges · Hindi + English · Voice prompts ✨
         </span>
         <h1 className="mt-5 text-5xl md:text-7xl font-bold leading-[1.05] tracking-tighter">
-          Pata <span className="text-aurora">Lagao</span>. <br />
-          Slow down, soch ke khelo.
+          🕹️ Pata <span className="text-aurora">Lagao</span> 👾<br />
+          Chill karo, soch ke khelo.
         </h1>
         <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Do mazedaar games — secret number dhoondo ya themed sentence ka one-word jawab dho. Hindi
-          translations, daily challenges, streaks aur ek global leaderboard. Bachchon ke liye perfect!
+          Do mazedaar games 🎲 — secret number dhoondo 🔢 ya themed sentence ka one-word jawab dho 💬.
+          Hindi translations, daily challenges, streaks 🔥 aur ek global leaderboard 🏆. Sab ke liye fun!
         </p>
       </section>
 
       <section className="mt-14 grid md:grid-cols-2 gap-6">
         <GameCard
           to="/number-game"
-          title="Number Guess"
-          subtitle="Crack the secret number"
+          title="🔢 Number Guess"
+          subtitle="Crack the secret number 🎯"
           desc="10 progressive levels. Tighter ranges, fewer attempts, bigger points."
           icon={<Hash className="w-7 h-7" />}
           accent="from-violet-500 to-fuchsia-500"
@@ -44,8 +44,8 @@ function Home() {
         />
         <GameCard
           to="/word-game"
-          title="Word Hunt"
-          subtitle="One sentence, one-word answer"
+          title="💬 Word Hunt"
+          subtitle="One sentence, one-word answer 🧠"
           desc="Pick General Knowledge, Cars, Cartoons or Movies. Hindi hints + daily streak!"
           icon={<MessageCircleQuestion className="w-7 h-7" />}
           accent="from-pink-400 to-orange-400"
@@ -54,9 +54,9 @@ function Home() {
       </section>
 
       <section className="mt-14 grid sm:grid-cols-3 gap-4">
-        <Feature icon={<Layers className="w-5 h-5" />} title="Daily challenges" desc="A new puzzle every day. Build a streak — it gets harder as you get better!" />
-        <Feature icon={<Volume2 className="w-5 h-5" />} title="Girl voice prompts" desc="A friendly voice reads every puzzle. Tap mute anytime." />
-        <Feature icon={<Trophy className="w-5 h-5" />} title="Global leaderboard" desc="Sign in to save scores and climb the world ranks." />
+        <Feature icon={<Layers className="w-5 h-5" />} title="🔥 Daily challenges" desc="A new puzzle every day. Build a streak — it gets harder as you get better!" />
+        <Feature icon={<Volume2 className="w-5 h-5" />} title="🎤 Girl voice prompts" desc="A friendly voice reads every puzzle. Tap mute anytime." />
+        <Feature icon={<Trophy className="w-5 h-5" />} title="🏆 Global leaderboard" desc="Sign in to save scores and climb the world ranks." />
       </section>
     </div>
   );
