@@ -6,8 +6,8 @@ import { sfx } from "@/lib/sound";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "GuessVerse — Two guessing games, one playground" },
-      { name: "description", content: "Pick the Number game or the Word game. Unlock levels, earn points, climb the global leaderboard." },
+      { title: "PataLagao — Fun guessing games with Hindi hints" },
+      { name: "description", content: "Pick the Number game or the Word game. Daily challenges, streaks, Hindi + English hints, and a global leaderboard." },
     ],
   }),
   component: Home,
@@ -20,16 +20,15 @@ function Home() {
     <div className="max-w-6xl mx-auto px-4 pt-12 pb-20">
       <section className="text-center max-w-3xl mx-auto">
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-medium text-muted-foreground">
-          <Zap className="w-3 h-3 text-accent" /> Live · Voice prompts · Global leaderboard
+          <Zap className="w-3 h-3 text-accent" /> Daily challenges · Hindi + English · Voice prompts
         </span>
         <h1 className="mt-5 text-5xl md:text-7xl font-bold leading-[1.05] tracking-tighter">
-          Guess your way <br />
-          to the <span className="text-aurora">top</span>.
+          Pata <span className="text-aurora">Lagao</span>! <br />
+          Guess karo, jeeto.
         </h1>
         <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Two guessing games in one futuristic playground. Crack the secret number or
-          decode a one-word answer to themed sentences. Earn points, unlock levels,
-          beat the world.
+          Do mazedaar games — secret number dhoondo ya themed sentence ka one-word jawab dho. Hindi
+          translations, daily challenges, streaks aur ek global leaderboard. Bachchon ke liye perfect!
         </p>
       </section>
 
@@ -47,16 +46,16 @@ function Home() {
           to="/word-game"
           title="Word Hunt"
           subtitle="One sentence, one-word answer"
-          desc="Pick a category you love — movies, sports, food, science and more."
+          desc="Pick General Knowledge, Cars, Cartoons or Movies. Hindi hints + daily streak!"
           icon={<MessageCircleQuestion className="w-7 h-7" />}
-          accent="from-cyan-400 to-emerald-400"
+          accent="from-pink-400 to-orange-400"
           onClick={() => sfx.click(muted)}
         />
       </section>
 
       <section className="mt-14 grid sm:grid-cols-3 gap-4">
-        <Feature icon={<Layers className="w-5 h-5" />} title="Progressive levels" desc="Each level unlocks once you earn enough points." />
-        <Feature icon={<Volume2 className="w-5 h-5" />} title="Voice prompts" desc="Each level greets you with a spoken intro. Mute anytime." />
+        <Feature icon={<Layers className="w-5 h-5" />} title="Daily challenges" desc="A new puzzle every day. Build a streak — it gets harder as you get better!" />
+        <Feature icon={<Volume2 className="w-5 h-5" />} title="Girl voice prompts" desc="A friendly voice reads every puzzle. Tap mute anytime." />
         <Feature icon={<Trophy className="w-5 h-5" />} title="Global leaderboard" desc="Sign in to save scores and climb the world ranks." />
       </section>
     </div>
