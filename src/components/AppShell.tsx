@@ -32,12 +32,12 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen flex flex-col">
       {/* floating blobs */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-32 -left-20 w-96 h-96 rounded-full opacity-15 animate-blob"
-             style={{ background: "radial-gradient(circle, oklch(0.85 0 0), transparent 70%)" }} />
-        <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] rounded-full opacity-10 animate-blob"
-             style={{ background: "radial-gradient(circle, oklch(0.6 0 0), transparent 70%)", animationDelay: "-6s" }} />
-        <div className="absolute -bottom-40 left-1/4 w-[450px] h-[450px] rounded-full opacity-10 animate-blob"
-             style={{ background: "radial-gradient(circle, oklch(0.75 0 0), transparent 70%)", animationDelay: "-12s" }} />
+        <div className="absolute -top-32 -left-20 w-96 h-96 rounded-full opacity-30 animate-blob"
+             style={{ background: "radial-gradient(circle, oklch(0.70 0.28 320), transparent 70%)" }} />
+        <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] rounded-full opacity-25 animate-blob"
+             style={{ background: "radial-gradient(circle, oklch(0.70 0.25 200), transparent 70%)", animationDelay: "-6s" }} />
+        <div className="absolute -bottom-40 left-1/4 w-[450px] h-[450px] rounded-full opacity-20 animate-blob"
+             style={{ background: "radial-gradient(circle, oklch(0.80 0.22 145), transparent 70%)", animationDelay: "-12s" }} />
       </div>
 
       <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/40 border-b border-border">
