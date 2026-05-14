@@ -6,7 +6,7 @@ import { sfx } from "@/lib/sound";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "PataLagao — Fun guessing games with Hindi hints" },
+      { title: "Guess — Calm guessing games with Hindi hints" },
       { name: "description", content: "Pick the Number game or the Word game. Daily challenges, streaks, Hindi + English hints, and a global leaderboard." },
     ],
   }),
@@ -23,8 +23,8 @@ function Home() {
           <Zap className="w-3 h-3 text-accent" /> Daily challenges · Hindi + English · Voice prompts
         </span>
         <h1 className="mt-5 text-5xl md:text-7xl font-bold leading-[1.05] tracking-tighter">
-          Pata <span className="text-aurora">Lagao</span>! <br />
-          Guess karo, jeeto.
+          <span className="text-aurora">Guess</span> it. <br />
+          Slow down, soch ke khelo.
         </h1>
         <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
           Do mazedaar games — secret number dhoondo ya themed sentence ka one-word jawab dho. Hindi
