@@ -61,6 +61,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             {navLink("/", "Home")}
             {navLink("/number-game", "Number")}
             {navLink("/word-game", "Word")}
+            {navLink("/song-game", "Songs")}
             {navLink("/leaderboard", "Leaderboard")}
           </nav>
 
@@ -104,6 +105,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           {navLink("/", "Home")}
           {navLink("/number-game", "Number")}
           {navLink("/word-game", "Word")}
+          {navLink("/song-game", "Songs")}
           {navLink("/leaderboard", <Trophy className="w-4 h-4" />)}
         </div>
       </header>
