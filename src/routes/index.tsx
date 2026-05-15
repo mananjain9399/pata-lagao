@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Hash, MessageCircleQuestion, Trophy, Zap, Volume2, Layers } from "lucide-react";
+import { Hash, MessageCircleQuestion, Music2, Trophy, Zap, Volume2, Layers } from "lucide-react";
 import { useSettings } from "@/lib/settings-context";
 import { sfx } from "@/lib/sound";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "PataLagao — Calm guessing games with Hindi hints" },
-      { name: "description", content: "Pick the Number game or the Word game. Daily challenges, streaks, Hindi + English hints, and a global leaderboard." },
+      { title: "PataLagao — Number, Word & Emoji Song guessing games" },
+      { name: "description", content: "Three calm guessing games — secret numbers, themed word hunts, and emoji songs. Hindi + English, daily challenges, streaks, and a global leaderboard." },
     ],
   }),
   component: Home,
@@ -27,33 +27,42 @@ function Home() {
           Chill karo, soch ke khelo.
         </h1>
         <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Do mazedaar games 🎲 — secret number dhoondo 🔢 ya themed sentence ka one-word jawab dho 💬.
-          Hindi translations, daily challenges, streaks 🔥 aur ek global leaderboard 🏆. Sab ke liye fun!
+          Teen mazedaar games 🎲 — secret number, themed sentence ya emoji ke songs. Hindi hints, daily streaks 🔥 aur global leaderboard 🏆.
         </p>
       </section>
 
-      <section className="mt-14 grid md:grid-cols-2 gap-6">
-        <GameCard
+      {/* compact 3-game launcher */}
+      <section className="mt-12 grid sm:grid-cols-3 gap-4">
+        <GameButton
           to="/number-game"
-          title="🔢 Number Guess"
-          subtitle="Crack the secret number 🎯"
-          desc="10 progressive levels. Tighter ranges, fewer attempts, bigger points."
-          icon={<Hash className="w-7 h-7" />}
-          accent="from-violet-500 to-fuchsia-500"
+          theme="theme-number"
+          logo="🔢"
+          icon={<Hash className="w-4 h-4" />}
+          title="Number Guess"
+          tag="10 levels · ranges"
           onClick={() => sfx.click(muted)}
         />
-        <GameCard
+        <GameButton
           to="/word-game"
-          title="💬 Word Hunt"
-          subtitle="One sentence, one-word answer 🧠"
-          desc="Pick General Knowledge, Cars, Cartoons or Movies. Hindi hints + daily streak!"
-          icon={<MessageCircleQuestion className="w-7 h-7" />}
-          accent="from-pink-400 to-orange-400"
+          theme="theme-word"
+          logo="💬"
+          icon={<MessageCircleQuestion className="w-4 h-4" />}
+          title="Word Hunt"
+          tag="Sentence → 1 word"
+          onClick={() => sfx.click(muted)}
+        />
+        <GameButton
+          to="/song-game"
+          theme="theme-song"
+          logo="🎵"
+          icon={<Music2 className="w-4 h-4" />}
+          title="Emoji Songs"
+          tag="Hindi · English · Punjabi"
           onClick={() => sfx.click(muted)}
         />
       </section>
 
-      <section className="mt-14 grid sm:grid-cols-3 gap-4">
+      <section className="mt-12 grid sm:grid-cols-3 gap-4">
         <Feature icon={<Layers className="w-5 h-5" />} title="🔥 Daily challenges" desc="A new puzzle every day. Build a streak — it gets harder as you get better!" />
         <Feature icon={<Volume2 className="w-5 h-5" />} title="🎤 Girl voice prompts" desc="A friendly voice reads every puzzle. Tap mute anytime." />
         <Feature icon={<Trophy className="w-5 h-5" />} title="🏆 Global leaderboard" desc="Sign in to save scores and climb the world ranks." />
@@ -62,30 +71,29 @@ function Home() {
   );
 }
 
-function GameCard({
-  to, title, subtitle, desc, icon, accent, onClick,
+function GameButton({
+  to, theme, logo, icon, title, tag, onClick,
 }: {
-  to: string; title: string; subtitle: string; desc: string;
-  icon: React.ReactNode; accent: string; onClick: () => void;
+  to: string; theme: string; logo: string; icon: React.ReactNode;
+  title: string; tag: string; onClick: () => void;
 }) {
   return (
     <Link
       to={to}
       onClick={onClick}
-      className="group relative glass-3d rounded-3xl p-8 overflow-hidden hover:-translate-y-1 transition-all duration-300"
+      className={`${theme} group relative glass rounded-2xl p-4 flex items-center gap-3 hover:-translate-y-0.5 hover:shadow-lg transition-all`}
     >
-      <div className={`absolute -top-20 -right-20 w-60 h-60 rounded-full blur-3xl opacity-40 bg-gradient-to-br ${accent} group-hover:opacity-60 transition`} />
-      <div className="relative">
-        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${accent} grid place-items-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-3 transition`}>
-          {icon}
-        </div>
-        <h3 className="mt-5 text-2xl font-bold tracking-tight">{title}</h3>
-        <p className="text-sm text-muted-foreground">{subtitle}</p>
-        <p className="mt-3 text-sm text-foreground/80">{desc}</p>
-        <div className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-aurora">
-          Play now →
-        </div>
+      <div className="w-12 h-12 rounded-xl bg-aurora grid place-items-center text-2xl shadow-md group-hover:scale-110 transition shrink-0">
+        <span aria-hidden>{logo}</span>
       </div>
+      <div className="min-w-0">
+        <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-muted-foreground">
+          {icon} <span>Play</span>
+        </div>
+        <div className="font-semibold tracking-tight">{title}</div>
+        <div className="text-xs text-muted-foreground truncate">{tag}</div>
+      </div>
+      <div className="ml-auto text-aurora font-semibold text-sm">→</div>
     </Link>
   );
 }

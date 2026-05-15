@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WordGameRouteImport } from './routes/word-game'
+import { Route as SongGameRouteImport } from './routes/song-game'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as NumberGameRouteImport } from './routes/number-game'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const WordGameRoute = WordGameRouteImport.update({
   id: '/word-game',
   path: '/word-game',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SongGameRoute = SongGameRouteImport.update({
+  id: '/song-game',
+  path: '/song-game',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/leaderboard': typeof LeaderboardRoute
   '/number-game': typeof NumberGameRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/song-game': typeof SongGameRoute
   '/word-game': typeof WordGameRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/leaderboard': typeof LeaderboardRoute
   '/number-game': typeof NumberGameRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/song-game': typeof SongGameRoute
   '/word-game': typeof WordGameRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/leaderboard': typeof LeaderboardRoute
   '/number-game': typeof NumberGameRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/song-game': typeof SongGameRoute
   '/word-game': typeof WordGameRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/number-game'
     | '/sitemap.xml'
+    | '/song-game'
     | '/word-game'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/number-game'
     | '/sitemap.xml'
+    | '/song-game'
     | '/word-game'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/number-game'
     | '/sitemap.xml'
+    | '/song-game'
     | '/word-game'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   LeaderboardRoute: typeof LeaderboardRoute
   NumberGameRoute: typeof NumberGameRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SongGameRoute: typeof SongGameRoute
   WordGameRoute: typeof WordGameRoute
 }
 
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/word-game'
       fullPath: '/word-game'
       preLoaderRoute: typeof WordGameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/song-game': {
+      id: '/song-game'
+      path: '/song-game'
+      fullPath: '/song-game'
+      preLoaderRoute: typeof SongGameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeaderboardRoute: LeaderboardRoute,
   NumberGameRoute: NumberGameRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SongGameRoute: SongGameRoute,
   WordGameRoute: WordGameRoute,
 }
 export const routeTree = rootRouteImport

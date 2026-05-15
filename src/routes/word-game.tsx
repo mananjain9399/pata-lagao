@@ -23,7 +23,12 @@ function load(): Progress {
   catch { return { points: 0, highest: 1 }; }
 }
 
-const UNLOCK_THRESHOLDS = [0, 25, 60, 110, 180, 270];
+// Generate unlimited level thresholds: cheap early levels, scaling cost
+function thresholdFor(idx: number) {
+  if (idx === 0) return 0;
+  // 0, 25, 60, 110, 180, 270, 380, 510, 660, 830, ...
+  return Math.round(25 * idx + 5 * idx * idx);
+}
 const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 
 type Mode = "category" | "daily";
@@ -64,7 +69,7 @@ function WordGame() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, category, levelIdx, dailyPuzzle.answer]);
 
-  const isLevelUnlocked = (idx: number) => progress.points >= (UNLOCK_THRESHOLDS[idx] ?? 9999);
+  const isLevelUnlocked = (idx: number) => progress.points >= thresholdFor(idx);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,12 +93,14 @@ function WordGame() {
         setStreak(ns);
         toast.success(`🔥 Daily streak: ${ns.streak} day${ns.streak === 1 ? "" : "s"}!`);
       } else if (mode === "category") {
-        const newlyUnlocked = UNLOCK_THRESHOLDS.findIndex(
-          (t, i) => i > levelIdx && progress.points < t && next.points >= t,
-        );
-        if (newlyUnlocked > 0) {
-          sfx.unlock(muted);
-          toast.success(`Level ${newlyUnlocked + 1} unlocked!`);
+        // detect any newly crossed threshold
+        for (let i = levelIdx + 1; i < cat.puzzles.length; i++) {
+          const t = thresholdFor(i);
+          if (progress.points < t && next.points >= t) {
+            sfx.unlock(muted);
+            toast.success(`Level ${i + 1} unlocked!`);
+            break;
+          }
         }
       }
       if (user) recordScore("word", next.points, next.highest).catch(() => {});
@@ -131,7 +138,7 @@ function WordGame() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 pt-8 pb-20">
+    <div className="theme-word max-w-5xl mx-auto px-4 pt-8 pb-20">
       <Confetti show={celebrate} />
 
       <div className="flex items-end justify-between flex-wrap gap-4">
@@ -207,7 +214,7 @@ function WordGame() {
                     ${active ? "bg-aurora text-primary-foreground shadow-lg scale-105" : ""}
                     ${unlocked && !active ? "glass hover:scale-105" : ""}
                     ${!unlocked ? "bg-muted/30 text-muted-foreground/40 cursor-not-allowed" : ""}`}
-                  title={unlocked ? `Level ${i + 1}` : `Unlock at ${UNLOCK_THRESHOLDS[i]} pts`}
+                  title={unlocked ? `Level ${i + 1}` : `Unlock at ${thresholdFor(i)} pts`}
                 >
                   {unlocked ? i + 1 : <Lock className="w-3.5 h-3.5 mx-auto" />}
                 </button>
@@ -252,7 +259,7 @@ function WordGame() {
               disabled={showHint || status !== "playing"}
               className="rounded-full px-3 py-2 text-xs flex items-center gap-1 hover:scale-105 transition bg-accent text-accent-foreground font-semibold disabled:opacity-50"
             >
-              <Lightbulb className="w-3.5 h-3.5" /> {showHint ? `Hint: ${puzzle.hintWord}` : "Use Hint"}
+              <Lightbulb className="w-3.5 h-3.5" /> Use Hint
             </button>
           </div>
         </div>
@@ -263,6 +270,16 @@ function WordGame() {
         <p className="mt-2 text-base md:text-lg text-muted-foreground" lang="hi">
           🇮🇳 {puzzle.hindi}
         </p>
+
+        {showHint && (
+          <div className="mt-4 glass rounded-2xl p-4 text-sm flex items-start gap-2">
+            <Lightbulb className="w-4 h-4 text-accent mt-0.5 shrink-0" />
+            <div>
+              <div className="font-semibold">Hint</div>
+              <div className="text-muted-foreground">{puzzle.hintWord}</div>
+            </div>
+          </div>
+        )}
 
         {/* letter reveal */}
         <div className="mt-6 flex flex-wrap gap-2 justify-center">

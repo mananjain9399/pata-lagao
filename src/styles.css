@@ -199,3 +199,74 @@
   .bg-aurora { background: var(--gradient-aurora); }
   .ring-aurora { box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-primary); }
 }
+
+/* ── Per-game theme overrides ─────────────────────────────
+   Each game wraps its page in one of these classes. They
+   re-tint the design tokens so every game feels distinct
+   while sharing the same components & layouts. */
+
+.theme-number {
+  /* deep indigo + electric violet — focused, brainy */
+  --primary: oklch(0.70 0.16 270);
+  --secondary: oklch(0.72 0.13 230);
+  --accent: oklch(0.80 0.15 200);
+  --ring: oklch(0.70 0.16 270);
+  --gradient-aurora: linear-gradient(135deg,
+    oklch(0.70 0.16 270) 0%,
+    oklch(0.66 0.18 250) 50%,
+    oklch(0.74 0.16 220) 100%);
+  --border: oklch(0.70 0.14 270 / 0.22);
+}
+.light .theme-number {
+  --primary: oklch(0.55 0.18 270);
+  --secondary: oklch(0.60 0.15 230);
+  --accent: oklch(0.62 0.16 200);
+  --gradient-aurora: linear-gradient(135deg,
+    oklch(0.58 0.18 270) 0%,
+    oklch(0.55 0.20 250) 50%,
+    oklch(0.62 0.16 220) 100%);
+}
+
+.theme-word {
+  /* warm sunset — pink/coral/peach, playful & wordy */
+  --primary: oklch(0.74 0.16 25);
+  --secondary: oklch(0.78 0.14 60);
+  --accent: oklch(0.82 0.14 350);
+  --ring: oklch(0.74 0.16 25);
+  --gradient-aurora: linear-gradient(135deg,
+    oklch(0.78 0.16 350) 0%,
+    oklch(0.76 0.18 25) 50%,
+    oklch(0.80 0.16 60) 100%);
+  --border: oklch(0.74 0.14 25 / 0.22);
+}
+.light .theme-word {
+  --primary: oklch(0.62 0.18 25);
+  --secondary: oklch(0.66 0.16 60);
+  --accent: oklch(0.68 0.16 350);
+  --gradient-aurora: linear-gradient(135deg,
+    oklch(0.66 0.18 350) 0%,
+    oklch(0.62 0.20 25) 50%,
+    oklch(0.68 0.18 60) 100%);
+}
+
+.theme-song {
+  /* fresh mint + teal — musical, energetic */
+  --primary: oklch(0.78 0.14 165);
+  --secondary: oklch(0.74 0.13 195);
+  --accent: oklch(0.82 0.14 130);
+  --ring: oklch(0.78 0.14 165);
+  --gradient-aurora: linear-gradient(135deg,
+    oklch(0.80 0.14 130) 0%,
+    oklch(0.78 0.15 165) 50%,
+    oklch(0.74 0.14 195) 100%);
+  --border: oklch(0.78 0.12 165 / 0.22);
+}
+.light .theme-song {
+  --primary: oklch(0.58 0.16 165);
+  --secondary: oklch(0.56 0.15 195);
+  --accent: oklch(0.62 0.16 130);
+  --gradient-aurora: linear-gradient(135deg,
+    oklch(0.62 0.16 130) 0%,
+    oklch(0.58 0.17 165) 50%,
+    oklch(0.56 0.16 195) 100%);
+}
