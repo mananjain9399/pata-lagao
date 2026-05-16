@@ -1,63 +1,109 @@
 export interface SongPuzzle {
   emojis: string;
-  answer: string;       // canonical title
-  aliases?: string[];   // alternate accepted answers
-  hint: string;         // multi-word helpful hint (NEVER the title itself)
+  answer: string;
+  aliases?: string[];
+  hint: string;
   artist?: string;
   language: "hindi" | "english" | "punjabi";
 }
 
+// Rebus-style: read the emojis aloud and you hear the song title.
 const songs: SongPuzzle[] = [
-  // ── HINDI ───────────────────────────────────────────────
-  { emojis: "💛🌈🌟", answer: "kal ho naa ho", aliases: ["kal ho na ho"], hint: "SRK and Saif Ali Khan film, sung by Sonu Nigam, title means 'tomorrow may not come'", artist: "Sonu Nigam", language: "hindi" },
-  { emojis: "🐘👫🌸", answer: "kuch kuch hota hai", hint: "Karan Johar's 1998 SRK-Kajol classic, title sung by Udit and Alka", artist: "Udit Narayan", language: "hindi" },
-  { emojis: "💃🇮🇳🎶", answer: "chaiyya chaiyya", hint: "Shah Rukh Khan dancing on top of a moving train, by A.R. Rahman", artist: "Sukhwinder Singh", language: "hindi" },
-  { emojis: "🌧️❤️🚂", answer: "tujhe dekha to ye jana sanam", aliases: ["tujhe dekha to"], hint: "DDLJ mustard fields scene with SRK and Kajol", artist: "Lata Mangeshkar", language: "hindi" },
-  { emojis: "🔥💃🎤", answer: "sheila ki jawani", hint: "Tees Maar Khan item number, Katrina Kaif on screen", artist: "Sunidhi Chauhan", language: "hindi" },
-  { emojis: "👶👶👶", answer: "tareefan", hint: "Veere Di Wedding girls' anthem with Badshah", artist: "Badshah", language: "hindi" },
-  { emojis: "🌙✨💕", answer: "chand sifarish", hint: "Fanaa romantic song, Aamir Khan and Kajol", artist: "Shaan", language: "hindi" },
-  { emojis: "🐦🕊️🎵", answer: "panchhi banu", hint: "Old Lata Mangeshkar classic about flying like a bird", artist: "Lata Mangeshkar", language: "hindi" },
-  { emojis: "💔🎻🌧️", answer: "channa mereya", hint: "Ae Dil Hai Mushkil heartbreak anthem by Arijit", artist: "Arijit Singh", language: "hindi" },
-  { emojis: "🌟🎤👑", answer: "deewangi deewangi", hint: "Om Shanti Om star-studded party song", artist: "Shaan", language: "hindi" },
-  { emojis: "🎓👫📚", answer: "give me some sunshine", hint: "3 Idiots emotional anthem about wanting freedom", artist: "Sharman Joshi", language: "hindi" },
-  { emojis: "🚗🛣️🎶", answer: "ilahi", hint: "Yeh Jawaani Hai Deewani road-trip song with Ranbir Kapoor", artist: "Arijit Singh", language: "hindi" },
-  { emojis: "🌺💍❤️", answer: "tum hi ho", hint: "Aashiqui 2 most-played romantic ballad", artist: "Arijit Singh", language: "hindi" },
-  { emojis: "🎭🌹💞", answer: "agar tum saath ho", hint: "Tamasha rain-soaked break-up song with Deepika and Ranbir", artist: "Alka Yagnik", language: "hindi" },
-  { emojis: "🐅🥁🔥", answer: "malhari", hint: "Bajirao Mastani celebration song with Ranveer Singh dancing", artist: "Vishal Dadlani", language: "hindi" },
+  // ── HINDI ─────────────────────────────────────────────────────────────
+  // "tum hi ho"  → you (👉) + only (1️⃣) + are (🫵)... use literal sounds
+  { emojis: "👉🅾️🏠", answer: "tum hi ho", hint: "Aashiqui 2 ka sabse famous romantic song — Arijit Singh", artist: "Arijit Singh", language: "hindi" },
+  // "kal ho naa ho" → tomorrow 📅➡️ + no 🚫 + house 🏠
+  { emojis: "📅🚫🏠", answer: "kal ho naa ho", aliases: ["kal ho na ho"], hint: "SRK film title track — tomorrow may not come", artist: "Sonu Nigam", language: "hindi" },
+  // "chaiyya chaiyya" → tea ☕ ☕ (chai-ya chai-ya)
+  { emojis: "☕➕☕", answer: "chaiyya chaiyya", hint: "Train ki chhat pe SRK ka dance — Dil Se", artist: "Sukhwinder Singh", language: "hindi" },
+  // "channa mereya" → moon 🌙 + mine 🙋‍♂️ (chand-a + mera)
+  { emojis: "🌙➕🙋", answer: "channa mereya", hint: "Ae Dil Hai Mushkil ka heartbreak song — Arijit", artist: "Arijit Singh", language: "hindi" },
+  // "gerua" → red colour 🔴 (Dilwale)
+  { emojis: "🔴🎨💃", answer: "gerua", hint: "Dilwale ka SRK-Kajol romantic colour song", artist: "Arijit Singh", language: "hindi" },
+  // "kabira" → weave 🧵 + saint 🧘 + boat 🛶 (Yeh Jawaani)
+  { emojis: "🧵🧘🛶", answer: "kabira", hint: "Yeh Jawaani Hai Deewani — Tochi Raina", artist: "Tochi Raina", language: "hindi" },
+  // "tujh mein rab dikhta hai" → you 👉 + inside ➡️ + god 🛐 + see 👁️
+  { emojis: "👉➡️🛐👁️", answer: "tujh mein rab dikhta hai", hint: "Rab Ne Bana Di Jodi — SRK Anushka", artist: "Roop Kumar Rathod", language: "hindi" },
+  // "chaand sifarish" → moon 🌙 + request ✉️🙏
+  { emojis: "🌙✉️🙏", answer: "chand sifarish", aliases: ["chaand sifarish"], hint: "Fanaa — Aamir Khan ka romantic song", artist: "Shaan", language: "hindi" },
+  // "sheila ki jawani" → girl 👧 + ka + youth 💃🔥
+  { emojis: "👧🔑💃🔥", answer: "sheila ki jawani", hint: "Katrina Kaif item number — Tees Maar Khan", artist: "Sunidhi Chauhan", language: "hindi" },
+  // "munni badnaam hui" → girl 👧 + bad 👎 + name 📛
+  { emojis: "👧👎📛", answer: "munni badnaam hui", hint: "Dabangg item song — Malaika Arora", artist: "Mamta Sharma", language: "hindi" },
+  // "ilahi" → god 🙏✨ (road trip)
+  { emojis: "🚗🛣️🙏", answer: "ilahi", hint: "Yeh Jawaani Hai Deewani road song — Arijit", artist: "Arijit Singh", language: "hindi" },
+  // "tareefan" → praise 👏✨
+  { emojis: "👏👑✨", answer: "tareefan", hint: "Veere Di Wedding party song — Badshah", artist: "Badshah", language: "hindi" },
+  // "malhari" → drums 🥁 + war 🐅⚔️
+  { emojis: "🥁🐅⚔️", answer: "malhari", hint: "Bajirao Mastani Ranveer victory dance", artist: "Vishal Dadlani", language: "hindi" },
+  // "give me some sunshine" — 3 Idiots
+  { emojis: "🙏☀️🎓", answer: "give me some sunshine", hint: "3 Idiots emotional anthem about freedom", artist: "Sharman Joshi", language: "hindi" },
+  // "agar tum saath ho" → if + you + with
+  { emojis: "❓👉🤝🏠", answer: "agar tum saath ho", hint: "Tamasha rain breakup song — Deepika & Ranbir", artist: "Alka Yagnik", language: "hindi" },
 
-  // ── ENGLISH ─────────────────────────────────────────────
-  { emojis: "👶✨🌟", answer: "baby", hint: "Justin Bieber's 2010 breakthrough hit with Ludacris", artist: "Justin Bieber", language: "english" },
-  { emojis: "👋🌹💔", answer: "hello", hint: "Adele's 2015 ballad — 'it's me, I was wondering...'", artist: "Adele", language: "english" },
-  { emojis: "👁️🐯🔥", answer: "eye of the tiger", hint: "Rocky III boxing-training anthem by Survivor", artist: "Survivor", language: "english" },
-  { emojis: "💃🎶👑", answer: "dance monkey", hint: "Australian artist Tones and I's 2019 viral hit", artist: "Tones and I", language: "english" },
-  { emojis: "🌙🚶‍♂️", answer: "moonwalk", aliases: ["billie jean"], hint: "Michael Jackson's signature move debuted with this 1982 hit", artist: "Michael Jackson", language: "english" },
-  { emojis: "🍦🚗🌅", answer: "shape of you", hint: "Ed Sheeran's most-streamed song from Divide album", artist: "Ed Sheeran", language: "english" },
-  { emojis: "🌧️🎤💜", answer: "purple rain", hint: "Prince's iconic 1984 power ballad", artist: "Prince", language: "english" },
-  { emojis: "🚀🌌👨‍🚀", answer: "rocket man", hint: "Elton John's classic about a lonely astronaut", artist: "Elton John", language: "english" },
-  { emojis: "🍀🌈🦄", answer: "lucky", hint: "Britney Spears ballad about a sad Hollywood star", artist: "Britney Spears", language: "english" },
-  { emojis: "❤️🩹🎵", answer: "bad habits", hint: "Ed Sheeran 2021 dance-pop comeback single", artist: "Ed Sheeran", language: "english" },
-  { emojis: "🦋💋🌹", answer: "butterfly kisses", hint: "1997 Bob Carlisle father-daughter ballad", artist: "Bob Carlisle", language: "english" },
-  { emojis: "🌌👽🎤", answer: "starboy", hint: "The Weeknd's Daft Punk collaboration", artist: "The Weeknd", language: "english" },
-  { emojis: "🔥🌶️💃", answer: "hot stuff", hint: "Donna Summer's 1979 disco classic", artist: "Donna Summer", language: "english" },
-  { emojis: "🐻🌲🎸", answer: "bear necessities", aliases: ["the bare necessities"], hint: "Jungle Book Disney song sung by Baloo", artist: "Phil Harris", language: "english" },
-  { emojis: "🎄🔔❄️", answer: "jingle bells", hint: "Most-known Christmas carol about dashing through snow", artist: "Traditional", language: "english" },
+  // ── ENGLISH ───────────────────────────────────────────────────────────
+  // "let it go" → 🔤L + 🆕(it) + 🟢go light
+  { emojis: "✋🌬️❄️", answer: "let it go", hint: "Frozen — Elsa's anthem", artist: "Idina Menzel", language: "english" },
+  // "rolling in the deep" → 🎲rolling + 🌊deep
+  { emojis: "🎲➡️🌊", answer: "rolling in the deep", hint: "Adele's 2010 mega-hit", artist: "Adele", language: "english" },
+  // "shape of you" → ⭕shape + 👉you
+  { emojis: "⭕🔤👉", answer: "shape of you", hint: "Ed Sheeran — Divide album single", artist: "Ed Sheeran", language: "english" },
+  // "eye of the tiger" → 👁️ + 🐯
+  { emojis: "👁️🔤🐯", answer: "eye of the tiger", hint: "Rocky III training song", artist: "Survivor", language: "english" },
+  // "hello" → 👋
+  { emojis: "👋📞🎤", answer: "hello", hint: "Adele — 'it's me, I was wondering...'", artist: "Adele", language: "english" },
+  // "rocket man" → 🚀 + 🧑
+  { emojis: "🚀🧑🌌", answer: "rocket man", hint: "Elton John classic about an astronaut", artist: "Elton John", language: "english" },
+  // "purple rain" → 💜 + 🌧️
+  { emojis: "💜🌧️🎸", answer: "purple rain", hint: "Prince's iconic 1984 ballad", artist: "Prince", language: "english" },
+  // "umbrella" → ☂️
+  { emojis: "☂️🌧️🎤", answer: "umbrella", hint: "Rihanna 'ella ella eh eh eh'", artist: "Rihanna", language: "english" },
+  // "firework" → 🎆
+  { emojis: "🎆💥✨", answer: "firework", hint: "Katy Perry — 'baby you're a...'", artist: "Katy Perry", language: "english" },
+  // "blank space" → ⬜ + 🌌
+  { emojis: "⬜🌌📝", answer: "blank space", hint: "Taylor Swift 1989 album hit", artist: "Taylor Swift", language: "english" },
+  // "bad guy" → 👎 + 👤
+  { emojis: "👎👤🎤", answer: "bad guy", hint: "Billie Eilish — 'duh' song", artist: "Billie Eilish", language: "english" },
+  // "thinking out loud" → 🤔 + 🔊
+  { emojis: "🤔💭🔊", answer: "thinking out loud", hint: "Ed Sheeran wedding-favourite ballad", artist: "Ed Sheeran", language: "english" },
+  // "happy" → 😀
+  { emojis: "😀👏🎵", answer: "happy", hint: "Pharrell Williams — clap along if you feel...", artist: "Pharrell Williams", language: "english" },
+  // "old town road" → 🤠 + 🛣️
+  { emojis: "🤠🐴🛣️", answer: "old town road", hint: "Lil Nas X country-rap viral hit", artist: "Lil Nas X", language: "english" },
+  // "jingle bells" → 🔔🔔
+  { emojis: "🔔🔔❄️", answer: "jingle bells", hint: "Most famous Christmas carol", artist: "Traditional", language: "english" },
 
-  // ── PUNJABI ─────────────────────────────────────────────
-  { emojis: "🚜🌾🥁", answer: "tractor", aliases: ["288 tractor"], hint: "Diljit Dosanjh song about a powerful farm vehicle, '288'", artist: "Diljit Dosanjh", language: "punjabi" },
-  { emojis: "👑🦁🔥", answer: "lehanga", hint: "Jass Manak romantic Punjabi hit about a girl's dress", artist: "Jass Manak", language: "punjabi" },
-  { emojis: "💃👰🎉", answer: "laembadgini", hint: "Diljit Dosanjh's hit song that puns on a famous supercar brand", artist: "Diljit Dosanjh", language: "punjabi" },
-  { emojis: "🎤🐍🔫", answer: "295", hint: "Sidhu Moose Wala's Punjabi hit named after an IPC section", artist: "Sidhu Moose Wala", language: "punjabi" },
-  { emojis: "❤️🥺💍", answer: "qismat", hint: "Ammy Virk romantic Punjabi film title song", artist: "Ammy Virk", language: "punjabi" },
-  { emojis: "👰🎉💖", answer: "suit suit", hint: "Guru Randhawa Punjabi-Bollywood crossover hit", artist: "Guru Randhawa", language: "punjabi" },
-  { emojis: "🚗🛣️💨", answer: "g wagon", aliases: ["gwagon"], hint: "Sidhu Moose Wala song about a Mercedes SUV", artist: "Sidhu Moose Wala", language: "punjabi" },
-  { emojis: "💔🌧️🌹", answer: "qismat 2", hint: "Sequel to Ammy Virk's heartbreak hit", artist: "Ammy Virk", language: "punjabi" },
-  { emojis: "👀🌶️💃", answer: "patola", hint: "Guru Randhawa song meaning 'beautiful girl' in Punjabi", artist: "Guru Randhawa", language: "punjabi" },
-  { emojis: "🐎👑🔥", answer: "so high", hint: "Sidhu Moose Wala's debut hit single from 2017", artist: "Sidhu Moose Wala", language: "punjabi" },
-  { emojis: "🌹💕🎤", answer: "lehnga", aliases: ["lehanga"], hint: "Jass Manak's wedding-themed romantic song", artist: "Jass Manak", language: "punjabi" },
-  { emojis: "🎶🎓👨‍👨‍👦", answer: "brown munde", hint: "AP Dhillon Punjabi anthem about brown-skinned boys abroad", artist: "AP Dhillon", language: "punjabi" },
-  { emojis: "💍❤️👰", answer: "shadaa", hint: "Diljit Dosanjh Punjabi film title song about staying single", artist: "Diljit Dosanjh", language: "punjabi" },
-  { emojis: "💸💎🚘", answer: "sip sip", hint: "Garry Sandhu's catchy 2018 Punjabi club hit", artist: "Garry Sandhu", language: "punjabi" },
-  { emojis: "🌙💔🥀", answer: "kya baat ay", hint: "Harrdy Sandhu Punjabi-Hindi crossover romantic hit", artist: "Harrdy Sandhu", language: "punjabi" },
+  // ── PUNJABI ───────────────────────────────────────────────────────────
+  // "tractor" → 🚜
+  { emojis: "🚜🌾🎤", answer: "tractor", aliases: ["288"], hint: "Diljit Dosanjh '288' farm-vehicle song", artist: "Diljit Dosanjh", language: "punjabi" },
+  // "lehanga" → 👰 dress
+  { emojis: "👰💃🎶", answer: "lehanga", aliases: ["lehnga"], hint: "Jass Manak wedding-dress romantic hit", artist: "Jass Manak", language: "punjabi" },
+  // "brown munde" → 🟤 + 👬
+  { emojis: "🟤👬✈️", answer: "brown munde", hint: "AP Dhillon anthem for desi boys abroad", artist: "AP Dhillon", language: "punjabi" },
+  // "295" → numbers
+  { emojis: "2️⃣9️⃣5️⃣", answer: "295", hint: "Sidhu Moose Wala song named after an IPC section", artist: "Sidhu Moose Wala", language: "punjabi" },
+  // "qismat" → fortune 🍀✨
+  { emojis: "🍀✨💔", answer: "qismat", hint: "Ammy Virk film title song about destiny", artist: "Ammy Virk", language: "punjabi" },
+  // "patola" → beautiful girl 👀💃
+  { emojis: "👀💃🌶️", answer: "patola", hint: "Guru Randhawa — means 'beautiful girl'", artist: "Guru Randhawa", language: "punjabi" },
+  // "so high" → high ⬆️☁️
+  { emojis: "⬆️☁️🐎", answer: "so high", hint: "Sidhu Moose Wala 2017 debut hit", artist: "Sidhu Moose Wala", language: "punjabi" },
+  // "g wagon" → letter G + 🚙
+  { emojis: "🇬🚙💨", answer: "g wagon", aliases: ["gwagon"], hint: "Sidhu Moose Wala song about a Mercedes SUV", artist: "Sidhu Moose Wala", language: "punjabi" },
+  // "laembadgini" → super car 🏎️
+  { emojis: "🏎️🤑💨", answer: "laembadgini", hint: "Diljit Dosanjh song that puns on a supercar", artist: "Diljit Dosanjh", language: "punjabi" },
+  // "suit suit" → 👔👔
+  { emojis: "👔👔👰", answer: "suit suit", hint: "Guru Randhawa Punjabi-Bollywood crossover", artist: "Guru Randhawa", language: "punjabi" },
+  // "kya baat ay" → ❓ + 🗣️
+  { emojis: "❓🗣️👌", answer: "kya baat ay", hint: "Harrdy Sandhu romantic crossover hit", artist: "Harrdy Sandhu", language: "punjabi" },
+  // "shadaa" → single 1️⃣
+  { emojis: "1️⃣💍🚫", answer: "shadaa", hint: "Diljit Dosanjh — about staying single", artist: "Diljit Dosanjh", language: "punjabi" },
+  // "sip sip" → 🥤🥤
+  { emojis: "🥤🥤🎉", answer: "sip sip", hint: "Garry Sandhu 2018 Punjabi club hit", artist: "Garry Sandhu", language: "punjabi" },
+  // "born to shine" → 👶+✨
+  { emojis: "👶➡️✨", answer: "born to shine", hint: "Diljit Dosanjh from Moonchild Era", artist: "Diljit Dosanjh", language: "punjabi" },
+  // "lover" → ❤️🧑
+  { emojis: "❤️🧑🎤", answer: "lover", hint: "Diljit Dosanjh / Guru Randhawa-style romantic hit (Diljit's MoonChild)", artist: "Diljit Dosanjh", language: "punjabi" },
 ];
 
 export const songLanguages = ["hindi", "english", "punjabi"] as const;
