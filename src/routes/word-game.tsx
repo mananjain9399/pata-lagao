@@ -48,7 +48,24 @@ function WordGame() {
   const [showHint, setShowHint] = useState(false);
   const [streak, setStreak] = useState<StreakState>({ streak: 0, lastDate: null, doneToday: false });
 
-  const cat = wordCategories[category];
+  // Per-session shuffle seed — new random order every time the game opens
+  const sessionSeed = useMemo(() => Math.random(), []);
+  const rawCat = wordCategories[category];
+  const shuffledPuzzles = useMemo(() => {
+    const arr = [...rawCat.puzzles];
+    // Fisher–Yates seeded by sessionSeed + category
+    let s = Math.floor(sessionSeed * 1e9) ^ category.split("").reduce((a, c) => a * 31 + c.charCodeAt(0), 7);
+    const rand = () => {
+      s = (s * 9301 + 49297) % 233280;
+      return s / 233280;
+    };
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [rawCat, category, sessionSeed]);
+  const cat = { ...rawCat, puzzles: shuffledPuzzles };
   const dailyPuzzle = useMemo(() => getDailyPuzzle(streak.streak), [streak.streak]);
   const puzzle: WordPuzzle = mode === "daily" ? dailyPuzzle : cat.puzzles[levelIdx];
   const totalLevels = cat.puzzles.length;
