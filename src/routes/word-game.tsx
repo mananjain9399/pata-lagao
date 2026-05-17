@@ -339,12 +339,22 @@ function WordGame() {
             <div className="text-xl">🎉 Shabaash!</div>
             <div className="text-sm text-muted-foreground">The word was <b className="uppercase">{puzzle.answer}</b>.</div>
             {mode === "category" && (
-              <div className="mt-3 flex justify-center gap-2">
-                {levelIdx + 1 < totalLevels && isLevelUnlocked(levelIdx + 1) && (
+              <div className="mt-3 flex justify-center gap-2 flex-wrap">
+                {levelIdx + 1 < totalLevels && isLevelUnlocked(levelIdx + 1) ? (
                   <button onClick={() => { setLevelIdx(levelIdx + 1); sfx.click(muted); }}
                     className="px-4 py-2 rounded-2xl bg-aurora text-primary-foreground text-sm font-semibold">
                     Next puzzle →
                   </button>
+                ) : (
+                  <button onClick={() => { setLevelIdx(0); sfx.click(muted); }}
+                    className="px-4 py-2 rounded-2xl bg-aurora text-primary-foreground text-sm font-semibold">
+                    Play again →
+                  </button>
+                )}
+                {levelIdx + 1 < totalLevels && !isLevelUnlocked(levelIdx + 1) && (
+                  <span className="px-3 py-2 text-xs text-muted-foreground">
+                    Next level unlocks at {thresholdFor(levelIdx + 1)} pts
+                  </span>
                 )}
               </div>
             )}
