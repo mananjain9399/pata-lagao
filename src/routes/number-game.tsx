@@ -61,11 +61,14 @@ function NumberGame() {
 
   useEffect(() => { setProgress(loadProgress()); }, []);
 
-  // unlock highest level the player has reached
+  // On first load only, jump to highest unlocked level. Don't snap back on every win —
+  // that was wiping the "Correct!" screen before users could click Next level.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const idx = LEVELS.findIndex((l) => l.n === progress.highest);
+    const p = loadProgress();
+    const idx = LEVELS.findIndex((l) => l.n === p.highest);
     if (idx >= 0) setLevelIdx(idx);
-  }, [progress.highest]);
+  }, []);
 
   // start round whenever level changes
   useEffect(() => {
