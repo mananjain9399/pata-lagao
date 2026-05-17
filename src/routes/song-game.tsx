@@ -195,6 +195,15 @@ function SongGame() {
           <div className="text-6xl md:text-7xl tracking-widest leading-none select-none">
             {puzzle.emojis}
           </div>
+          {puzzle.breakdown && puzzle.breakdown.length > 0 && (
+            <div className="mt-5 flex flex-wrap justify-center gap-2">
+              {puzzle.breakdown.map((b, i) => (
+                <span key={i} className="glass rounded-full px-3 py-1.5 text-xs text-muted-foreground">
+                  {b}
+                </span>
+              ))}
+            </div>
+          )}
           {puzzle.artist && status !== "playing" && (
             <div className="mt-3 text-sm text-muted-foreground">by <b>{puzzle.artist}</b></div>
           )}
